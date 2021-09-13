@@ -7,24 +7,33 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/cart")
+@RequestMapping("")
 public class CartController {
 
-    @GetMapping
-    public String index(){
-        return "cart/index";
+    ProductDao productDao;
+
+    public CartController(ProductDao productDao) {
+        this.productDao = productDao;
     }
 
-    @GetMapping("/buy/{id}")
+    @RequestMapping(value = "index", method = RequestMethod.GET)
+    public String index() {
+        return "index";
+    }
+
+    List<Item> cart;
+
+    @RequestMapping(value = "buy/{id}", method = RequestMethod.GET)
     public String buy(@PathVariable("id")String id, Model model){
-        ProductDao productDao = new ProductDao();
+
         if(model.getAttribute("cart")==null){
-            List<Item> cart = new ArrayList<>();
+             cart = new ArrayList<>();
             cart.add(new Item(productDao.find(id), 1));
             model.addAttribute("cart", cart);
         } else{
@@ -39,7 +48,7 @@ public class CartController {
             }
             model.addAttribute("cart", cart);
         }
-        return "redirect:/cart/index";
+        return "/index";
     }
 
     @GetMapping("/remove/{id}")
@@ -49,7 +58,7 @@ public class CartController {
         int index = this.exists(id, cart);
         cart.remove(index);
         model.addAttribute("cart", cart);
-        return "redirect:/cart/index";
+        return "redirect:/index";
     }
 
     private int exists(String id, List<Item> cart) {

@@ -36,7 +36,7 @@ public class ProductDao {
     }
 
     public Product find(String id) {
-        for (Product product : this.products) {
+        for (Product product : products) {
             if (product.getId().equalsIgnoreCase(id)) {
                 return product;
             }
