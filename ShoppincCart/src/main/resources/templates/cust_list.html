@@ -1,0 +1,54 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home Page</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/cust_list.css}">
+
+   </head>
+<body>
+
+<h2> Cart: </h2>
+<a th:href="@{additemcust}" class="btn btn-danger add_item">
+    Edit cart
+</a>
+
+<a th:href="@{printbill}" class="btn btn-dark back">
+    Bill
+</a>
+
+<table class="table table-bordered table-striped">
+
+    <thead class="table-dark">
+    <tr>
+        <th>
+            Item Name
+        </th>
+        <th>
+            Item Price
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Sum
+        </th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="prod:${items}">
+        <td th:text="${prod.key.name}"></td>
+        <td th:text="${prod.key.price}"></td>
+        <td th:text="${prod.value}"></td>
+        <td th:text="${prod.value}*${prod.key.price}"></td>
+
+
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>

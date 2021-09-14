@@ -19,7 +19,7 @@
         <td th:text="${product.getDescription()}"/>
         <td th:text="${product.getPrice()}"/><br>
         <td>
-        <td><a th:href="@{/buy/{id}(id=${product.getId()})}">Buy</a></td>
+        <td><a th:href="@{cart/buy/{id}(id=${product.getId()})}">Buy</a></td>
         </td>
     </tr>
 </table>

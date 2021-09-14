@@ -1,6 +1,7 @@
 package com.example.webshop.controller;
 
 import com.example.webshop.model.Item;
+import com.example.webshop.model.Product;
 import com.example.webshop.repository.ProductDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("")
+@RequestMapping("/cart")
 public class CartController {
 
     ProductDao productDao;
@@ -22,20 +23,25 @@ public class CartController {
         this.productDao = productDao;
     }
 
-    @RequestMapping(value = "index", method = RequestMethod.GET)
-    public String index() {
+    List<Item> cart;
+    @GetMapping("/index")
+    public String index(Model model) {
+
+        model.addAttribute("cart", cart);
+        model.addAttribute("newcart", new Product());
         return "index";
     }
 
-    List<Item> cart;
 
-    @RequestMapping(value = "buy/{id}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/buy/{id}", method = RequestMethod.GET)
     public String buy(@PathVariable("id")String id, Model model){
 
         if(model.getAttribute("cart")==null){
              cart = new ArrayList<>();
             cart.add(new Item(productDao.find(id), 1));
             model.addAttribute("cart", cart);
+            return "index";
         } else{
             List<Item> cart = (List<Item>)model.getAttribute("cart");
             int index = this.exists(id, cart);
@@ -48,7 +54,7 @@ public class CartController {
             }
             model.addAttribute("cart", cart);
         }
-        return "/index";
+        return "redirect:/cart/index";
     }
 
     @GetMapping("/remove/{id}")
@@ -58,7 +64,7 @@ public class CartController {
         int index = this.exists(id, cart);
         cart.remove(index);
         model.addAttribute("cart", cart);
-        return "redirect:/index";
+        return "redirect:cart/index";
     }
 
     private int exists(String id, List<Item> cart) {
