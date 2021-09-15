@@ -7,9 +7,21 @@ public class Items {
     private Double price;
 
     private int stock;
+    private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
 
     public Items(){
 
+    }
+
+    public Items(String name, Double price, int stock, Category category) {
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+        this.category = category;
     }
 
     public Items(String name, Double price, int stock) {
@@ -18,7 +30,6 @@ public class Items {
         this.stock = stock;
     }
 
-    // And also we need to add stock manally.
     public void add_stock(int add){
         this.stock+=add;
     }
@@ -31,14 +42,6 @@ public class Items {
         return name;
     }
 
-    @Override
-    public String toString() {
-        return "Items{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
-                ", stock=" + stock +
-                '}';
-    }
 
     public void setName(String name) {
         this.name = name;

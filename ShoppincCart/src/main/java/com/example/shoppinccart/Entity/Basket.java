@@ -24,32 +24,4 @@ public class Basket {
     }
 }
 
-   /* public HashMap<Items, Integer> getBasket() {
-        return basket;
-    }
 
-        public boolean add_item(Items item){
-     int pos=search_item(item.getName());
-     if(pos>=0){
-        Items item1=this.items.get(pos);/
- }
-    }
-//
-//    public int  search_item(String item){
-//
-//        for (Items exist:this.items) {
-//            if(exist.getName().toLowerCase().equals(item.toLowerCase())){
-//                return 0;
-//            }
-//
-//            return -1;
-//
-//        }
-//
-//
-//    }
-//
-//    public List<Items> getItems() {
-//        return items;
-//    }
-}*/

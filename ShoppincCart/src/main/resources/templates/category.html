@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home Page</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+<h1></h1> Category: <td th:text="${categ.name}"/> </h1>
+<a th:href="@{additemcust}" class="btn btn-danger add_item">
+    Back
+</a>
+ <table class="table table-bordered table-striped">
+
+     <thead class="table-dark">
+     <tr>
+         <th>
+             Item Name
+         </th>
+         <th>
+             Item Price
+         </th>
+         <th>
+             Item Instock
+         </th>
+         <th>
+             Actions
+         </th>
+     </tr>
+     </thead>
+
+     <tr th:each="a:${products}">
+         <td th:iniline="text">[[${a.name}]]</td>
+         <td th:iniline="text">[[${a.price}]]</td>
+         <td th:iniline="text">[[${a.stock}]]</td>
+         <td>
+             <a th:href="@{custitemupd(name=${a.name})}" class="btn btn-info">Add Item</a>
+             <a th:href="@{custitemdel(name=${a.name})}"class="btn btn-danger">Remove Item</a>
+         </td>
+
+     </tr>
+ </table>
+</body>
+</html>

@@ -8,7 +8,6 @@ public class Customer {
 
     private Double bill_amount=0.0;
 
-    //Every customer hase individaul basket for shopping
     private Basket basket;
 
     public Customer() {
