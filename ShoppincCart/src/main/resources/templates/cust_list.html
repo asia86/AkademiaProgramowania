@@ -9,7 +9,9 @@
    </head>
 <body>
 
-<h2> Cart: </h2>
+<nav th:fragment="header">
+    <h1>Cart contents</h1>
+</nav>
 <a th:href="@{additemcust}" class="btn btn-danger add_item">
     Edit cart
 </a>

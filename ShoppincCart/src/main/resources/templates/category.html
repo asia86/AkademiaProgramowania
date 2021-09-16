@@ -8,7 +8,8 @@
 
 </head>
 <body>
-<h1></h1> Category: <td th:text="${categ.name}"/> </h1>
+<h2 th:inline="text" class="title">Category: [[${categ.name}]]</h2>
+<hr class="rule">
 <a th:href="@{additemcust}" class="btn btn-danger add_item">
     Back
 </a>

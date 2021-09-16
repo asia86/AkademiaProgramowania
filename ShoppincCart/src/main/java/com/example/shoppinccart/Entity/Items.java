@@ -9,9 +9,7 @@ public class Items {
     private int stock;
     private Category category;
 
-    public Category getCategory() {
-        return category;
-    }
+
 
     public Items(){
 
@@ -23,6 +21,7 @@ public class Items {
         this.stock = stock;
         this.category = category;
     }
+
 
     public Items(String name, Double price, int stock) {
         this.name = name;
@@ -42,6 +41,14 @@ public class Items {
         return name;
     }
 
+    public void setCategoryName(String category) {
+        this.category.setName(category);
+    }
+
+
+    public Category getCategory() {
+        return category;
+    }
 
     public void setName(String name) {
         this.name = name;

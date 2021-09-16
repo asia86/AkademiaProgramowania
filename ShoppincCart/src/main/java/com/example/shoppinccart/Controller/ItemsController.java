@@ -16,13 +16,13 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/shopping")
-public class HomeController {
+public class ItemsController {
 
     private final ItemDao shoppingCartDao;
     private CategoryService categoryService;
     Customer customer = new Customer();
 
-    public HomeController(ItemDao shoppingCartDao, CategoryService categoryService) {
+    public ItemsController(ItemDao shoppingCartDao, CategoryService categoryService) {
         this.shoppingCartDao = shoppingCartDao;
         this.categoryService = categoryService;
     }

@@ -11,10 +11,19 @@ import java.util.List;
 
 @Service
 public class CategoryService {
-    private List<Category> categories = Arrays.asList(new Category(1, "groceries"),
-            new Category(2, "cosmetics"),
-            new Category(3, "fruits"),
-            new Category(4, "vegetables"));
+    private List<Category> categories = new ArrayList<>();
+
+
+    public CategoryService() {
+        Category cat1 = new Category(1, "groceries");
+        Category cat2 = new Category(2, "cosmetics");
+        Category cat3 = new Category(3, "fruits");
+        Category cat4 = new Category(3, "vegetables");
+        categories.add(cat1);
+        categories.add(cat2);
+        categories.add(cat3);
+        categories.add(cat4);
+    }
 
     public List<Category> getAllCategories(){
         return categories;

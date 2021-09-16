@@ -29,6 +29,7 @@ public class ItemDao {
         this.items.add(item4);
         this.items.add(item5);
         this.items.add(item6);
+
     }
 
     public List<Items> getItems() {
@@ -86,6 +87,17 @@ public class ItemDao {
             return false;
         }
 
+    }
 
+    public boolean add_item(Items item){
+
+        int pos=check_item(item.getName());
+        if(pos<0){
+            this.items.add(item);
+            return true;
+        }else {
+            System.out.println("Item => "+item.getName()+" already exist");
+        }
+        return false;
     }
 }
