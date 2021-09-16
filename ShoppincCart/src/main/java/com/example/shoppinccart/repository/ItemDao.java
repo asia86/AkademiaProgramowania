@@ -17,12 +17,12 @@ public class ItemDao {
 
     public ItemDao(List<Items> items) {
         this.items = items;
-        Items item1 = new Items("Juice", 45.5, 120,new Category(1, "groceries"));
-        Items item2 = new Items("Shampoo", 122.5, 520, new Category(2, "cosmetics"));
-        Items item3 = new Items("Biscuits", 12.5, 320, new Category(1, "groceries"));
-        Items item4 = new Items("Apple", 2.5, 120, new Category(3, "fruits"));
-        Items item5 = new Items("Tomato", 3.5, 240, new Category(4, "vegetables"));
-        Items item6 = new Items("Soap", 12.5, 320, new Category(2, "cosmetics"));
+        Items item1 = new Items("Juice", 45.5, 120,new Category("1", "groceries"));
+        Items item2 = new Items("Shampoo", 122.5, 520, new Category("2", "cosmetics"));
+        Items item3 = new Items("Biscuits", 12.5, 320, new Category("1", "groceries"));
+        Items item4 = new Items("Apple", 2.5, 120, new Category("3", "fruits"));
+        Items item5 = new Items("Tomato", 3.5, 240, new Category("4", "vegetables"));
+        Items item6 = new Items("Soap", 12.5, 320, new Category("2", "cosmetics"));
         this.items.add(item1);
         this.items.add(item2);
         this.items.add(item3);

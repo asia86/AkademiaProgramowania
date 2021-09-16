@@ -5,10 +5,7 @@ import com.example.shoppinccart.Entity.Items;
 import com.example.shoppinccart.repository.ItemDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin")
@@ -54,6 +51,61 @@ public class AdminController {
         } finally {
             return "redirect:index";
         }
+    }
+
+    @GetMapping("/itemupd")
+    public String upd_item(@RequestParam("name")String name, Model model ){
+
+        if(name!=null){
+
+            int pos=itemDao.check_item(name);
+            if(pos>=0){
+
+                Items item=itemDao.getItems().get(pos);
+                model.addAttribute("Item",item);
+                return "update_item";
+
+            }
+
+        }
+
+        return "redirect:index";
+    }
+
+    @PostMapping("updateitem")
+    public String update_item(@RequestParam("name")String[] name,@ModelAttribute("Item")Items item){
+        if ((item.getName() != null && item.getPrice() != 0) && (item.getStock() != 0)) {
+            int pos = itemDao.check_item(name[0]);
+//            System.out.println(pos+" => "+name[0]);
+            if (pos >= 0) {
+                Items items = itemDao.getItems().get(pos);
+                items.setName(name[1]);
+                items.setPrice(item.getPrice());
+                items.setStock(item.getStock());
+//                System.out.println(item.toString());
+                return "redirect:index";
+            } else {
+                itemDao.add_item(item);
+            }
+        }
+        return "redirect:index";
+    }
+
+    @GetMapping("/itemdel")
+    public String del_item(@RequestParam("name")String name){
+        if(name!=null){
+
+            int pos=itemDao.check_item(name);
+            if(pos>=0){
+
+//                Items item=shoppingCart.getItems().get(pos);
+//                model.addAttribute("Item",item);
+                itemDao.getItems().remove(pos);
+
+            }
+
+        }
+        return "redirect:index";
     }
 
 }
