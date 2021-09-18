@@ -1,6 +1,5 @@
 package com.example.shoppinccart.Controller;
 
-import com.example.shoppinccart.Entity.Category;
 import com.example.shoppinccart.Entity.Items;
 import com.example.shoppinccart.repository.ItemDao;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,7 @@ public class AdminController {
     @GetMapping("/index")
     public String listitems(Model model) {
         model.addAttribute("Items", itemDao.getItems());
-        return "product_list";
+        return "admin_product_list";
     }
 
     @GetMapping("/additems")
@@ -97,13 +96,8 @@ public class AdminController {
 
             int pos=itemDao.check_item(name);
             if(pos>=0){
-
-//                Items item=shoppingCart.getItems().get(pos);
-//                model.addAttribute("Item",item);
                 itemDao.getItems().remove(pos);
-
             }
-
         }
         return "redirect:index";
     }

@@ -8,9 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -28,11 +25,6 @@ public class ItemsController {
     }
 
 
-    @GetMapping("/init")
-    public String homepage(Model model){
-        return "redirect:additemcust";
-    }
-
     @GetMapping("/categories")
     public String getCategory(@RequestParam("name")String name, Model model){
         model.addAttribute("categ", categoryService.getCategory(name));
@@ -49,14 +41,14 @@ public class ItemsController {
             price+= e.getKey().getPrice()*e.getValue();
         }
         model.addAttribute("total", price);
-        return "cust_list";
+        return "cust_cart";
     }
 
-    @GetMapping("/additemcust")
+    @GetMapping("/shop")
     public String add_item_cust(Model model){
                 model.addAttribute("Categories", categoryService.getAllCategories());
                 model.addAttribute("Items", shoppingCartDao.getItems());
-        return "cust_items";
+        return "shop_product_list";
             }
 
     @GetMapping("/custitemupd")

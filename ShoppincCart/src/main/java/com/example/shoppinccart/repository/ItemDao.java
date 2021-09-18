@@ -50,10 +50,8 @@ public class ItemDao {
 
     public boolean add_prod_basket(Customer cust, String item, int quantity) {
 
-        // int checkcust=check_cust(customer);
         int itemcheck = check_item(item);
         if (itemcheck >= 0) {
-            //Customer cust=this.customers.get(checkcust);
             Items item_add = items.get(itemcheck);
             HashMap<Items, Integer> basket = cust.getBasket().getBasket();
             if (basket.containsKey(item_add)) {

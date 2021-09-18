@@ -6,16 +6,25 @@
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
+
    </head>
 <body>
 
 <nav th:fragment="header">
-    <h1>Cart contents</h1>
+    <h1>Online shop</h1>
+    <p align="right"><a th:href="@{/}" class="btn btn-dark back"> Home </a> </p>
 </nav>
-<a th:href="@{additemcust}" class="btn btn-danger add_item">
-    Edit cart
-</a>
 
+<h2 th:inline="text" class="title">Product categories</h2>
+<hr class="rule">
+<tr th:each="cat:${Categories}">
+
+    <a th:href="@{categories(name=${cat.name})}" class="btn btn-danger add_item">
+        [[${cat.name}]]
+    </a>
+</tr>
+
+<br> <br>
 
 <table class="table table-bordered table-striped">
 
@@ -28,31 +37,24 @@
             Item Price
         </th>
         <th>
-            Quantity
+            Item Instock
         </th>
         <th>
-            Sum
+            Actions
         </th>
-
     </tr>
     </thead>
     <tbody>
-    <tr th:each="prod:${items}">
-        <td th:text="${prod.key.name}"></td>
-        <td th:text="${prod.key.price}"></td>
-        <td th:text="${prod.value}"></td>
-        <td th:text="${prod.value}*${prod.key.price}"></td>
-    </tr>
-    <tr>
-        <td colspan="3" style="font-size:18px;text-align:center;font-weight:bold;">
-            Total Amount to pay
-        </td>
-        <td th:text="${total}">
+    <tr th:each="a:${Items}">
+        <td th:iniline="text">[[${a.name}]]</td>
+        <td th:iniline="text">[[${a.price}]]</td>
+        <td th:iniline="text">[[${a.stock}]]</td>
+        <td>
+            <a th:href="@{custitemupd(name=${a.name})}" class="btn btn-info">Add Item</a>
         </td>
     </tr>
+
     </tbody>
-
 </table>
-
 </body>
 </html>
