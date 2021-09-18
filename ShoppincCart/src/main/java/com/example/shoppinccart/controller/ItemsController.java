@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class ItemsController {
 
     private final ItemDao shoppingCartDao;
-    private CategoryDao categoryDao;
+    private final CategoryDao categoryDao;
     Customer customer = new Customer();
 
     public ItemsController(ItemDao shoppingCartDao, CategoryDao categoryService) {
@@ -24,6 +24,13 @@ public class ItemsController {
         this.categoryDao = categoryService;
     }
 
+
+    @GetMapping("/shop")
+    public String add_item_cust(Model model){
+        model.addAttribute("Categories", categoryDao.getAllCategories());
+        model.addAttribute("Items", shoppingCartDao.getItems());
+        return "shop_product_list";
+    }
 
     @GetMapping("/categories")
     public String getCategory(@RequestParam("name")String name, Model model){
@@ -35,7 +42,6 @@ public class ItemsController {
     @GetMapping("/cart")
     public String items(Model model){
         model.addAttribute("items", customer.getBasket().getBasket().entrySet());
-
         double price = 0.0;
         for(Map.Entry<Items, Integer> e: customer.getBasket().getBasket().entrySet()){
             price+= e.getKey().getPrice()*e.getValue();
@@ -44,12 +50,6 @@ public class ItemsController {
         return "cust_cart";
     }
 
-    @GetMapping("/shop")
-    public String add_item_cust(Model model){
-                model.addAttribute("Categories", categoryDao.getAllCategories());
-                model.addAttribute("Items", shoppingCartDao.getItems());
-        return "shop_product_list";
-            }
 
     @GetMapping("/custitemupd")
     public String add_cust_item(@RequestParam("name")String item,Model model){
@@ -57,7 +57,6 @@ public class ItemsController {
         if(item!=null ){
             int pos1= shoppingCartDao.check_item(item);
             if(pos1>=0){
-
                 model.addAttribute("item",item);
             }
         }
@@ -72,7 +71,6 @@ public class ItemsController {
             try{
                 int pos1= shoppingCartDao.check_item(item);
                 if( pos1>=0){
-
                     shoppingCartDao.add_prod_basket(customer, item,Integer.valueOf(quantity));
 //                ModelAndView modelAndView=new ModelAndView();
                     model.addAttribute("name",item);
