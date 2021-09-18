@@ -1,4 +1,4 @@
-package com.example.shoppinccart.Controller;
+package com.example.shoppinccart.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

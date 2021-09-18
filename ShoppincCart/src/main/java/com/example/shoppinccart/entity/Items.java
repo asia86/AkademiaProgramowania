@@ -1,4 +1,4 @@
-package com.example.shoppinccart.Entity;
+package com.example.shoppinccart.entity;
 
 public class Items {
 

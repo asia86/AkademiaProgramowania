@@ -1,8 +1,8 @@
 package com.example.shoppinccart.repository;
 
-import com.example.shoppinccart.Entity.Category;
-import com.example.shoppinccart.Entity.Customer;
-import com.example.shoppinccart.Entity.Items;
+import com.example.shoppinccart.entity.Category;
+import com.example.shoppinccart.entity.Customer;
+import com.example.shoppinccart.entity.Items;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

@@ -1,6 +1,6 @@
-package com.example.shoppinccart.Controller;
+package com.example.shoppinccart.controller;
 
-import com.example.shoppinccart.Entity.Items;
+import com.example.shoppinccart.entity.Items;
 import com.example.shoppinccart.repository.ItemDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,9 +63,7 @@ public class AdminController {
                 Items item=itemDao.getItems().get(pos);
                 model.addAttribute("Item",item);
                 return "update_item";
-
             }
-
         }
 
         return "redirect:index";
@@ -75,7 +73,6 @@ public class AdminController {
     public String update_item(@RequestParam("name")String[] name,@ModelAttribute("Item")Items item){
         if ((item.getName() != null && item.getPrice() != 0) && (item.getStock() != 0)) {
             int pos = itemDao.check_item(name[0]);
-//            System.out.println(pos+" => "+name[0]);
             if (pos >= 0) {
                 Items items = itemDao.getItems().get(pos);
                 items.setName(name[1]);

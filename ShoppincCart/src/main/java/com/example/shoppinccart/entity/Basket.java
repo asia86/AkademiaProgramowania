@@ -1,4 +1,4 @@
-package com.example.shoppinccart.Entity;
+package com.example.shoppinccart.entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;

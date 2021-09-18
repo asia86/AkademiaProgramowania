@@ -1,20 +1,19 @@
-package com.example.shoppinccart.service;
+package com.example.shoppinccart.repository;
 
 
-import com.example.shoppinccart.Entity.Category;
-import com.example.shoppinccart.Entity.Items;
+import com.example.shoppinccart.entity.Category;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-@Service
-public class CategoryService {
+@Repository
+public class CategoryDao {
     private List<Category> categories = new ArrayList<>();
 
 
-    public CategoryService() {
+    public CategoryDao() {
         Category cat1 = new Category("1", "groceries");
         Category cat2 = new Category("2", "cosmetics");
         Category cat3 = new Category("3", "fruits");
@@ -25,22 +24,14 @@ public class CategoryService {
         categories.add(cat4);
     }
 
-    public List<Category> getAllCategories(){
+    public List<Category> getAllCategories() {
         return categories;
     }
 
-    public Category getCategory(String name){
+    public Category getCategory(String name) {
         return categories.stream().filter(c -> c.getName().equals(name)).findFirst().get();
     }
 
-  /*  public List<Items> findProducts(String name){
-        List<Items> products = new ArrayList<>();
-        for(Items i: shoppingCartDao.getItems()){
-            if(name.equals(i.getCategory())){
-                products.add(i);
-            }
-        }
-    }*/
-
-
 }
+
+
