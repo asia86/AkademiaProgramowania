@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDate;
+
 @SpringBootApplication
 public class AccessingDataJpaApplication {
 
@@ -25,6 +27,8 @@ public class AccessingDataJpaApplication {
             repository.save(new Customer("Kim", "Bauer"));
             repository.save(new Customer("David", "Palmer"));
             repository.save(new Customer("Michelle", "Dessler"));
+
+
 
             // fetch all customers
             log.info("Customers found with findAll():");
@@ -52,6 +56,7 @@ public class AccessingDataJpaApplication {
             // }
             log.info("");
         };
+
     }
 
 }

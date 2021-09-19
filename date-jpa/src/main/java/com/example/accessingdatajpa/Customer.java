@@ -1,9 +1,8 @@
 package com.example.accessingdatajpa;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Customer {
@@ -20,6 +19,8 @@ public class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+    @OneToMany(mappedBy="customer")
+    private List<Order> orders = new ArrayList<>();
 
     @Override
     public String toString() {
