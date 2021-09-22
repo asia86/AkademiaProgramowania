@@ -13,14 +13,17 @@ public class Product {
     private String name;
     private Double price;
     private String description;
+
+    @Enumerated(EnumType.STRING)
     private Category category;
 
-
-    public Product(String name, Double price, String description) {
+    public Product(String name, Double price, String description, Category category) {
         this.name = name;
         this.price = price;
         this.description = description;
+        this.category = category;
     }
+
 
     public Category getCategory() {
         return category;

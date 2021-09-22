@@ -17,9 +17,9 @@
 
 <h2 th:inline="text" class="title">Product categories</h2>
 <hr class="rule">
-<tr th:each="cat:${Categories}">
+<tr th:each="cat:${categories}">
 
-    <a th:href="@{categories(name=${cat.name})}" class="btn btn-danger add_item">
+    <a th:href="@{categories(name=${cat})}" class="btn btn-danger add_item">
         [[${cat.name}]]
     </a>
 </tr>
