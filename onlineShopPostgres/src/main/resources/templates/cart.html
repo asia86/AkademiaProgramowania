@@ -6,25 +6,17 @@
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
-
-</head>
+   </head>
 <body>
 
 <nav th:fragment="header">
-    <h1>Online shop</h1>
-    <p align="right"><a th:href="@{/}" class="btn btn-dark"> Home </a> </p>
+    <h1>Cart contents</h1>
 </nav>
+<a th:href="@{products}" class="btn btn-danger add_item">
+    Back to shop
+</a>
+<br><br>
 
-<h2 th:inline="text" class="title">Product categories</h2>
-<hr class="rule">
-<tr th:each="cat:${categories}">
-
-    <a th:href="@{categories(name=${cat})}" class="btn btn-danger add_item">
-        [[${cat}]]
-    </a>
-</tr>
-
-<br> <br>
 
 <table class="table table-bordered table-striped">
 
@@ -37,24 +29,37 @@
             Item Price
         </th>
         <th>
-            Descripption
+            Quantity
         </th>
         <th>
-            Actions
+            Sum
         </th>
+        <th>
+            Remove
+        </th>
+
     </tr>
     </thead>
     <tbody>
-    <tr th:each="a:${products}">
-        <td th:iniline="text">[[${a.name}]]</td>
-        <td th:iniline="text">[[${a.price}]]</td>
-        <td th:iniline="text">[[${a.description}]]</td>
+    <tr th:each="prod:${products}">
+        <td th:text="${prod.key.name}"></td>
+        <td th:text="${prod.key.price}"></td>
+        <td th:text="${prod.value}"></td>
+        <td th:text="${prod.value}*${prod.key.price}"></td>
         <td>
-            <a th:href="@{add_to_cart/(name=${a.name})}" class="btn btn-info">Add Item</a>
+            <a th:href="@{custitemdel(name=${prod.key.name})}"class="btn btn-danger">Remove Item</a>
         </td>
     </tr>
-
+    <tr>
+        <td colspan="3" style="font-size:18px;text-align:center;font-weight:bold;">
+            Total Amount to pay
+        </td>
+        <td th:text="${total}">
+        </td>
+    </tr>
     </tbody>
+
 </table>
+
 </body>
 </html>

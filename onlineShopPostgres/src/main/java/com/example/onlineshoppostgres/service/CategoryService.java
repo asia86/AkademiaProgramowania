@@ -10,6 +10,7 @@ import java.util.List;
 public class CategoryService {
    private List<Category> categoryList = Arrays.asList(Category.values());
 
+
     public List<Category> getCategoryList() {
         return categoryList;
     }
@@ -17,4 +18,16 @@ public class CategoryService {
     public void setCategoryList(List<Category> categoryList) {
         this.categoryList = categoryList;
     }
+
+
+
+    public String getCategoryByName(String categoryName){
+        for(Category cat: this.categoryList){
+            if(cat.name().equals(categoryName))
+                return cat.name();
+
+        }
+        return  null;
+    }
+
 }

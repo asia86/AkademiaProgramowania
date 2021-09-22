@@ -3,6 +3,7 @@ package com.example.onlineshoppostgres.controller;
 
 import com.example.onlineshoppostgres.model.Category;
 import com.example.onlineshoppostgres.model.Product;
+import com.example.onlineshoppostgres.repository.CartRepository;
 import com.example.onlineshoppostgres.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -12,11 +13,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class Start {
     private ProductRepository productRepository;
+    private CartRepository cartRepository;
 
     @Autowired
-    public Start(ProductRepository productRepository) {
+    public Start(ProductRepository productRepository, CartRepository cartRepository) {
         this.productRepository = productRepository;
+        this.cartRepository = cartRepository;
     }
+
 
 
     @EventListener(ApplicationReadyEvent.class)
