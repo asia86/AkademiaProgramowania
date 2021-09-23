@@ -57,29 +57,33 @@ public class ProductController {
 
     @RequestMapping("/add_to_cart")
     public String addProduct(@RequestParam("name") String name, @ModelAttribute Cart cart){
-        System.out.println("--------------------------------------test-dodawania do koszyka---------------");
-       cartService.addToCart(name, cart, cartRepository);
-        System.out.println("-------------Po metodzie--------");
+       cartService.addProductToCart(productRepository.findByName(name), 1);
 
         return "redirect:/cart";
     }
 
     @RequestMapping("/cart")
     public String getCart(Model model){
-        System.out.println("--------------metoda cart-------------");
         Map<Product,Integer> productList = new HashMap<>();
-        for(Cart product: this.cartRepository.findAll()){
-            productList.put(product.getProduct(), product.getAmount());
-        }
-        model.addAttribute("products", productList.entrySet());
+
         double total = 0.0;
         List<Cart> cartList = cartRepository.findAll();
         for(Cart item: cartList){
+            productList.put(item.getProduct(), item.getAmount());
             total+=item.getAmount()*item.getProduct().getPrice();
         }
+        model.addAttribute("products", productList);
         model.addAttribute("total", total);
 
         return "cart";
+    }
+
+    @RequestMapping("/delete")
+    public String deleteItemFromCart(@RequestParam ("id") Long id){
+
+        cartRepository.delete(cartRepository.findByProduct_ProductId(id));
+     
+        return "redirect:/cart";
     }
 
 

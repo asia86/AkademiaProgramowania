@@ -1,5 +1,7 @@
 package com.example.onlineshoppostgres.model;
 
+import com.example.onlineshoppostgres.repository.CartRepository;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,9 +11,10 @@ public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @ManyToOne
+   @ManyToOne
+   @JoinColumn(name = "productId")
     private Product product;
 
     private int amount;

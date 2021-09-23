@@ -47,7 +47,7 @@
         <td th:text="${prod.value}"></td>
         <td th:text="${prod.value}*${prod.key.price}"></td>
         <td>
-            <a th:href="@{custitemdel(name=${prod.key.name})}"class="btn btn-danger">Remove Item</a>
+            <a th:href="@{delete/(id=${prod.key.productId})}" class="btn btn-danger">Remove Item</a>
         </td>
     </tr>
     <tr>
