@@ -32,9 +32,11 @@
             Item Price
         </th>
         <th>
-            Item Instock
+            Description
         </th>
-
+        <th>
+            Category
+        </th>
         <th>
             Actions
         </th>
@@ -45,6 +47,7 @@
         <td th:iniline="text">[[${a.name}]]</td>
         <td th:iniline="text">[[${a.price}]]</td>
         <td th:iniline="text">[[${a.description}]]</td>
+        <td th:iniline="text">[[${a.getCategory().name()}]]</td>
         <td>
             <a th:href="@{itemupd(name=${a.name})}" class="btn btn-info">Update Item</a>
             <a th:href="@{itemdel(name=${a.name})}"class="btn btn-danger">Delete Item</a>

@@ -2,6 +2,7 @@ package com.example.onlineshoppostgres.model;
 
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
@@ -11,13 +12,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
     private String name;
-    private Double price;
+    private BigDecimal price;
     private String description;
 
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    public Product(String name, Double price, String description, Category category) {
+    public Product(String name, BigDecimal price, String description, Category category) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -60,11 +61,11 @@ public class Product {
         this.name = name;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

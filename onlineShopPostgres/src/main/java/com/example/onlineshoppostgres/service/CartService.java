@@ -6,6 +6,8 @@ import com.example.onlineshoppostgres.repository.CartRepository;
 import com.example.onlineshoppostgres.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.*;
 
 @Service
@@ -52,12 +54,13 @@ public class CartService {
 
 
     public void addProductToCart(Product product, Integer quantity){
-       double total= 0.0;
+        BigDecimal total = new BigDecimal(BigInteger.valueOf(0));
        boolean bool = false;
        for(Cart item: cartRepository.findAll()){
            if(item.getProduct().getName().equals(product.getName())){
                item.setAmount(item.getAmount()+quantity);
-               total+=item.getAmount()*item.getProduct().getPrice();
+               total=total.add(item.getProduct().getPrice().multiply(BigDecimal.valueOf(item.getAmount())));
+              // total+=item.getAmount()*item.getProduct().getPrice();
                item.setProduct(product);
                cartRepository.save(item);
                bool = true;

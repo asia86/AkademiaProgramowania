@@ -17,7 +17,6 @@
 
      <thead class="table-dark">
      <tr>
-
          <th>
              Item Name
          </th>
@@ -25,21 +24,25 @@
              Item Price
          </th>
          <th>
-             Item Instock
+             Descripption
+         </th>
+         <th>
+             Category
          </th>
          <th>
              Actions
          </th>
      </tr>
      </thead>
+     <tbody>
      <tr th:each="a:${products}">
          <td th:iniline="text">[[${a.name}]]</td>
          <td th:iniline="text">[[${a.price}]]</td>
          <td th:iniline="text">[[${a.description}]]</td>
+         <td th:iniline="text">[[${a.getCategory().name()}]]</td>
          <td>
-             <a th:href="@{add_to_cart/(name=${a.name})}" class="btn btn-info">Add Item</a>
+             <a th:href="@{add_to_cart/(name=${a.name})}" class="btn btn-info">Add product to cart</a>
          </td>
-
      </tr>
 
  </table>

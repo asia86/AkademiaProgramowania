@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,13 +40,12 @@ public class ProductController {
     @GetMapping("/")
     public String homepage(Model model){
 
-        System.out.println("--------------------------------------test----------------");
         return "home";
     }
     @GetMapping("/products")
     public String getAllProduct(Model model){
-        model.addAttribute("products", this.productRepository.findAll());
-        model.addAttribute("categories", this.categoryService.getCategoryList());
+        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("categories", Category.values());
         return "shop_products_list";
     }
 
@@ -66,11 +67,13 @@ public class ProductController {
     public String getCart(Model model){
         Map<Product,Integer> productList = new HashMap<>();
 
-        double total = 0.0;
+        BigDecimal total = new BigDecimal(BigInteger.valueOf(0));
         List<Cart> cartList = cartRepository.findAll();
         for(Cart item: cartList){
             productList.put(item.getProduct(), item.getAmount());
-            total+=item.getAmount()*item.getProduct().getPrice();
+            total= total.add(item.getProduct().getPrice().multiply(BigDecimal.valueOf(item.getAmount())));
+            //total.add((item.getAmount().multiply(item.getProduct().getPrice()));
+            //total+=item.getAmount()*item.getProduct().getPrice();
         }
         model.addAttribute("products", productList);
         model.addAttribute("total", total);
