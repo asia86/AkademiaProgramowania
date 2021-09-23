@@ -1,0 +1,60 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home Page</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+<nav th:fragment="header">
+    <h1>Products list</h1>
+</nav>
+<a th:href="@{additems}" class="btn btn-danger add_item">
+    Add Item
+</a>
+<a th:href="@{/products}" class="btn btn-dark back">
+    Go to client panel
+</a>
+<a th:href="@{/}" class="btn btn-dark back">
+    Home
+</a>
+<br> <br>
+<table class="table table-bordered table-striped">
+
+    <thead class="table-dark">
+    <tr>
+        <th>
+            Item Name
+        </th>
+        <th>
+            Item Price
+        </th>
+        <th>
+            Item Instock
+        </th>
+
+        <th>
+            Actions
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="a:${Items}">
+        <td th:iniline="text">[[${a.name}]]</td>
+        <td th:iniline="text">[[${a.price}]]</td>
+        <td th:iniline="text">[[${a.description}]]</td>
+        <td>
+            <a th:href="@{itemupd(name=${a.name})}" class="btn btn-info">Update Item</a>
+            <a th:href="@{itemdel(name=${a.name})}"class="btn btn-danger">Delete Item</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
+
+
+</table>

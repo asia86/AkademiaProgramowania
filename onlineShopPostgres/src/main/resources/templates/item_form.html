@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home Page</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+<body>
+
+<form action="#" th:action="@{saveitem}" th:object="${Item}" method="post" class="myform">
+    <h2>Add Item Form</h2>
+    <hr>
+    <label>Item Name</label>
+    <input type="text" th:field="*{name}" class="form-control col-5">
+    <br>
+    <label>Item Price</label>
+    <input type="text" th:field="*{price}" class="form-control col-5">
+    <br>
+    <label>Item description</label>
+    <input type="text" th:field="*{description}" class="form-control col-5">
+    <br>
+    <input type="submit" class="btn btn-outline-dark" value="Add Item">
+    <a th:href="@{admin}" class="btn btn-outline-primary">
+        Back
+    </a>
+</form>
+</body>
+</html>

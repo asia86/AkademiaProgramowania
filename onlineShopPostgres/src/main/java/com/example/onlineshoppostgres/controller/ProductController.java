@@ -82,7 +82,7 @@ public class ProductController {
     public String deleteItemFromCart(@RequestParam ("id") Long id){
 
         cartRepository.delete(cartRepository.findByProduct_ProductId(id));
-     
+
         return "redirect:/cart";
     }
 

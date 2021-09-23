@@ -17,6 +17,7 @@
 
      <thead class="table-dark">
      <tr>
+
          <th>
              Item Name
          </th>
@@ -36,7 +37,7 @@
          <td th:iniline="text">[[${a.price}]]</td>
          <td th:iniline="text">[[${a.description}]]</td>
          <td>
-             <a th:href="@{custitemupd(name=${a.name})}" class="btn btn-info">Add Item</a>
+             <a th:href="@{add_to_cart/(name=${a.name})}" class="btn btn-info">Add Item</a>
          </td>
 
      </tr>
