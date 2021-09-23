@@ -37,12 +37,12 @@ public class ProductService {
 
     public void updateItem(Product product, String name) {
         if ((product.getName() != null && (product.getDescription() != null))) {
-            if (productRepository.findByName(product.getName()) == null) {
-                product.setName(name);
-                product.setPrice(product.getPrice());
-                product.setDescription(product.getDescription().trim());
-                productRepository.save(product);
-            }
+                Product product1 = productRepository.getById(product.getProductId());
+                product1.setName(name);
+                product1.setPrice(product.getPrice());
+                product1.setDescription(product.getDescription().trim());
+                productRepository.save(product1);
+
         }
 
     }

@@ -72,10 +72,10 @@ public class ProductController {
         for(Cart item: cartList){
             productList.put(item.getProduct(), item.getAmount());
             total= total.add(item.getProduct().getPrice().multiply(BigDecimal.valueOf(item.getAmount())));
-            //total.add((item.getAmount().multiply(item.getProduct().getPrice()));
-            //total+=item.getAmount()*item.getProduct().getPrice();
+
         }
         model.addAttribute("products", productList);
+        model.addAttribute("totalSpecial", cartService.specialOffer(0.8));
         model.addAttribute("total", total);
 
         return "cart";

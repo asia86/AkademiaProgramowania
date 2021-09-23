@@ -30,26 +30,6 @@ public class CartService {
         this.productMap = productMap;
     }
 
-   /* public void  addToCart(String name, Cart cart){
-        System.out.println("Czy metoda działa................");
-
-        Integer newQuantity = (1);
-        Product product = productRepository.findByName(name);
-        cart.setProduct(product);
-        if(cart.getAmount()!=0)
-            newQuantity= newQuantity+1;
-        cart.setAmount(newQuantity);
-        cartRepository.save(cart);
-
-        double total = 0.0;
-        List<Cart> cartList = cartRepository.findAll();
-        for(Cart item: cartList){
-
-            total+=item.getAmount()*item.getProduct().getPrice();
-        }
-
-    }*/
-
 
 
 
@@ -60,7 +40,6 @@ public class CartService {
            if(item.getProduct().getName().equals(product.getName())){
                item.setAmount(item.getAmount()+quantity);
                total=total.add(item.getProduct().getPrice().multiply(BigDecimal.valueOf(item.getAmount())));
-              // total+=item.getAmount()*item.getProduct().getPrice();
                item.setProduct(product);
                cartRepository.save(item);
                bool = true;
@@ -74,10 +53,19 @@ public class CartService {
 
     }
 
-    public void deleteProductFromCart(Long id){
 
+    public BigDecimal specialOffer(double reduction){
 
-
+        BigDecimal totalSpecial = new BigDecimal(BigInteger.valueOf(0));
+        for ( Cart item : cartRepository.findAll()) {
+            if(item.getAmount()>=2){
+                totalSpecial=totalSpecial.add(item.getProduct().getPrice().multiply(BigDecimal.valueOf(reduction)).multiply(BigDecimal.valueOf(item.getAmount())));
+            } else {
+                totalSpecial=totalSpecial.add(item.getProduct().getPrice().multiply(BigDecimal.valueOf(item.getAmount())));
+            }
+        }
+        return totalSpecial;
     }
+
 
 }

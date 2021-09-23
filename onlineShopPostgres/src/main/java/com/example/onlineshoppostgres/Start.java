@@ -1,4 +1,4 @@
-package com.example.onlineshoppostgres.controller;
+package com.example.onlineshoppostgres;
 
 
 import com.example.onlineshoppostgres.model.Category;

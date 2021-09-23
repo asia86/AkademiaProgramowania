@@ -46,8 +46,10 @@
         <td th:text="${prod.key.price}"></td>
         <td th:text="${prod.value}"></td>
         <td th:text="${prod.value}*${prod.key.price}"></td>
+
         <td>
             <a th:href="@{delete/(id=${prod.key.productId})}" class="btn btn-danger">Remove Item</a>
+            <a th:href="@{add_to_cart/(name=${prod.key.name})}" class="btn btn-info">Add Item</a>
         </td>
     </tr>
     <tr>
@@ -55,6 +57,13 @@
             Total Amount to pay
         </td>
         <td th:text="${total}">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" style="font-size:18px;text-align:center;font-weight:bold;">
+            Special offer. Total to paid:
+        </td>
+        <td th:text="${totalSpecial}">
         </td>
     </tr>
     </tbody>

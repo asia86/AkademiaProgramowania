@@ -24,6 +24,7 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String listitems(Model model) {
+
         model.addAttribute("Items", productRepository.findAll());
         model.addAttribute("categories", Category.values());
         return "admin_product_list";
@@ -31,6 +32,7 @@ public class AdminController {
 
     @GetMapping("/additems")
     public String add_item(Model model) {
+
         model.addAttribute("Item", new Product());
         model.addAttribute("categories", Category.values());
         return "item_form";
@@ -38,8 +40,8 @@ public class AdminController {
 
     @PostMapping("/saveitem")
     public String saveItem(@ModelAttribute("Item")Product item){
-        productService.addItem(item);
 
+        productService.addItem(item);
         return "redirect:admin";
     }
 
@@ -55,18 +57,14 @@ public class AdminController {
     @PostMapping("save_updateitem")
     public String update_item(@RequestParam("name")String name,@ModelAttribute("Item")Product item) {
 
-        Product product = productRepository.getById(item.getProductId());
-        product.setName(item.getName());
-        product.setPrice(item.getPrice());
-        product.setDescription(item.getDescription());
-        productRepository.save(product);
-
+        productService.updateItem(item, name);
         return "redirect:admin";
     }
 
 
     @GetMapping("/itemdel")
     public String del_item(@RequestParam("name")String name){
+
         productRepository.delete(productRepository.findByName(name));
         return "redirect:admin";
     }
