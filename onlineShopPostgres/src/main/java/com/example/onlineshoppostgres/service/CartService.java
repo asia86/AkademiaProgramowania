@@ -12,6 +12,7 @@ import java.util.*;
 
 @Service
 public class CartService {
+
     CartRepository cartRepository;
     ProductRepository productRepository;
 
@@ -20,20 +21,44 @@ public class CartService {
         this.productRepository = productRepository;
     }
 
-    Map<Product, Integer> productMap = new HashMap<>();
+    public Product byName(String name) {
+        Product product = new Product();
+        try {
+            product = productRepository.findByName(name);
+        }
+        catch (RuntimeException e){
+            e.getMessage();
 
-    public Map<Product, Integer> getProductMap() {
-        return productMap;
+        }
+        return product;
+
     }
 
-    public void setProductMap(Map<Product, Integer> productMap) {
-        this.productMap = productMap;
+
+
+    public Map<Product, Integer> getAllProductsFromCart(){
+
+        Map<Product, Integer> productList = new HashMap<>();
+        List<Cart> cartList = cartRepository.findAll();
+        for(Cart item: cartList){
+            productList.put(item.getProduct(), item.getAmount());
+
+        }
+        return productList;
+    }
+
+    public BigDecimal getTotal(){
+        List<Cart> cartList = cartRepository.findAll();
+        BigDecimal total = new BigDecimal(BigInteger.valueOf(0));
+        for(Cart item: cartList){
+            total= total.add(item.getProduct().getPrice().multiply(BigDecimal.valueOf(item.getAmount())));
+
+        }
+        return total;
     }
 
 
-
-
-    public void addProductToCart(Product product, Integer quantity){
+    public CartRepository addProductToCart(Product product, Integer quantity){
         BigDecimal total = new BigDecimal(BigInteger.valueOf(0));
        boolean bool = false;
        for(Cart item: cartRepository.findAll()){
@@ -50,6 +75,7 @@ public class CartService {
            cartRepository.save(cart);
 
         }
+      return cartRepository;
 
     }
 

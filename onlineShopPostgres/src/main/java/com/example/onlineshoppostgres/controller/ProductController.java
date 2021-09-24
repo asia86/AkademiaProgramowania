@@ -51,8 +51,8 @@ public class ProductController {
 
     @GetMapping("/categories")
     public String getCategory(@RequestParam("name")String name, Model model){
-        model.addAttribute("category",this.categoryService.getCategoryByName(name));
-        model.addAttribute("products", this.productRepository.findAllByCategory(Category.valueOf(name)));
+        model.addAttribute("category", categoryService.getCategoryByName(name));
+        model.addAttribute("products", productRepository.findAllByCategory(Category.valueOf(name)));
         return "category";
     }
 
@@ -65,15 +65,9 @@ public class ProductController {
 
     @RequestMapping("/cart")
     public String getCart(Model model){
-        Map<Product,Integer> productList = new HashMap<>();
 
-        BigDecimal total = new BigDecimal(BigInteger.valueOf(0));
-        List<Cart> cartList = cartRepository.findAll();
-        for(Cart item: cartList){
-            productList.put(item.getProduct(), item.getAmount());
-            total= total.add(item.getProduct().getPrice().multiply(BigDecimal.valueOf(item.getAmount())));
-
-        }
+        Map<Product,Integer> productList = cartService.getAllProductsFromCart();
+        BigDecimal total = cartService.getTotal();
         model.addAttribute("products", productList);
         model.addAttribute("totalSpecial", cartService.specialOffer(0.8));
         model.addAttribute("total", total);

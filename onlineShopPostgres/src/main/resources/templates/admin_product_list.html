@@ -3,14 +3,13 @@
     <title>Home Page</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
 </head>
 <body>
-<nav th:fragment="header">
-    <h1>Products list</h1>
-</nav>
+
+    <h1 th:align="center">Products list</h1>
+
 <a th:href="@{additems}" class="btn btn-danger add_item">
     Add Item
 </a>

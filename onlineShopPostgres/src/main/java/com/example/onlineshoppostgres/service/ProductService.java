@@ -1,5 +1,6 @@
 package com.example.onlineshoppostgres.service;
 
+import com.example.onlineshoppostgres.model.Cart;
 import com.example.onlineshoppostgres.model.Product;
 import com.example.onlineshoppostgres.repository.ProductRepository;
 import org.springframework.context.annotation.Bean;
@@ -11,14 +12,15 @@ import java.math.BigDecimal;
 public class ProductService {
 
     private ProductRepository productRepository;
-
+    private final Product product = new Product();
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
-
     }
 
-    public void  addItem(Product product){
+
+
+    public Product addItem(Product product){
         try {
             if (product.getName() != null  && (product.getDescription() != null)) {
                 if (productRepository.findByName(product.getName()) == null) {
@@ -32,6 +34,7 @@ public class ProductService {
         } catch (Exception e) {
             System.out.println("Exception occurs => " + e.getMessage());
         }
+        return product;
 
     }
 

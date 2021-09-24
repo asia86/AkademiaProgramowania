@@ -3,17 +3,14 @@
     <title>Home Page</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
 
 </head>
 <body>
 
-<nav th:fragment="header">
-    <h1>Online shop</h1>
-    <p align="right"><a th:href="@{/}" class="btn btn-dark"> Home </a> </p>
-</nav>
+    <h1 th:align="center" th:bgcolor="white"> Online shop</h1>
+    <p th:align="right" ><a th:href="@{/}" class="btn btn-dark"> Home </a> </p>
 
 <h2 th:inline="text" class="title">Product categories</h2>
 <hr class="rule">
@@ -26,7 +23,7 @@
 
 <br> <br>
 <hr class="rule">
-<p th:align="center"> Special promotion!!! Buy minimum 2 items  of one product and get 20% discount</p>
+<p th:align="center"> Special promotion!!! Buy minimum 2 of the same items to get 20% discount</p>
 
 <table class="table table-bordered table-striped">
 
