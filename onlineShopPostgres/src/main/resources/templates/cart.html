@@ -34,7 +34,7 @@
             Sum
         </th>
         <th>
-            Remove
+            Action
         </th>
 
     </tr>
@@ -47,8 +47,15 @@
         <td th:text="${prod.value}*${prod.key.price}"></td>
 
         <td>
-            <a th:href="@{delete/(id=${prod.key.productId})}" class="btn btn-danger">Remove Item</a>
-            <a th:href="@{add_to_cart/(name=${prod.key.name})}" class="btn btn-info">Add Item</a>
+
+            <form th:method="delete" th:action="@{/products/{id}(id=${prod.key.productId})}">
+                <button type="submit"  value="delete" class="btn btn-info">Remove item</button>
+            </form>
+
+            <form method="POST" th:action="@{/products(name=${prod.key.name})}">
+                <button type="submit" name="submit" value="value" class="btn btn-info">Add item</button>
+            </form>
+
         </td>
     </tr>
     <tr>

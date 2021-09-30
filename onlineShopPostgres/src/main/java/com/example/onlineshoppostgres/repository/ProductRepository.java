@@ -16,6 +16,8 @@ List<Product> findAllByCategory(Category category);
 
 Product findByName(String name);
 
+Product findByProductId(Long id);
+
 
 
 

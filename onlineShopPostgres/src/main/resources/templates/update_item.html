@@ -7,8 +7,8 @@
    </head>
 <body>
 
-<form action="#" th:action="@{save_updateitem}" th:object="${Item}" method="post" class="myform">
-    <h2>Add Item Form</h2>
+<form action="#" th:action="@{/admin/products}" th:object="${Item}" method="post" class="myform">
+    <h2>Update Item Form</h2>
     <hr>
     <input type="hidden" th:field="*{productId}">
     <label>Item Name</label>
@@ -20,8 +20,18 @@
     <label>Item description</label>
     <input type="text" th:field="*{description}" class="form-control col-5">
     <br>
+    <label>Category</label>
+    <select class="form-control col-5" id="category" name="category">
+        <option value=""></option>
+        <option th:each="cat : ${categories}"
+                th:value="${cat}"
+                th:selected="${Item.category.name()}"
+                th:text="${cat.name()}">
+        </option>
+    </select>
+    <br>
     <input type="submit" class="btn btn-outline-dark" value="Update Item">
-    <a th:href="@{admin}" class="btn btn-outline-primary">
+    <a th:href="@{/admin/products}" class="btn btn-outline-primary">
         Back
     </a>
 </form>

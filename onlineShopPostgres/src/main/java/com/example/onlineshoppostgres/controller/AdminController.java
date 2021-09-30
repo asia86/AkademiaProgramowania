@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-@RequestMapping("")
+@RequestMapping("admin")
 public class AdminController {
 
     private final ProductRepository productRepository;
@@ -22,7 +22,7 @@ public class AdminController {
     }
 
 
-    @GetMapping("/admin")
+    @GetMapping("/products")
     public String listitems(Model model) {
 
         model.addAttribute("Items", productRepository.findAll());
@@ -30,7 +30,7 @@ public class AdminController {
         return "admin_product_list";
     }
 
-    @GetMapping("/additems")
+    @GetMapping("/products-form")
     public String add_item(Model model) {
 
         model.addAttribute("Item", new Product());
@@ -38,34 +38,29 @@ public class AdminController {
         return "item_form";
     }
 
-    @PostMapping("/saveitem")
+    @PostMapping("/products")
     public String saveItem(@ModelAttribute("Item")Product item){
 
         productService.addItem(item);
-        return "redirect:admin";
+        return "redirect:/admin/products";
     }
 
-    @GetMapping("/itemupd")
-    public String upd_item(@RequestParam("name")String name, Model model ){
-
-        Product item=productRepository.findByName(name);
+    @PutMapping("/products/{id}")
+    public String upd_item(@PathVariable("id")Long id, Model model ){
+        System.out.println("uptade test");
+        Product item=productRepository.findByProductId(id);
         model.addAttribute("Item",item);
+        model.addAttribute("categories", Category.values());
+
         return "update_item";
 
     }
 
-    @PostMapping("save_updateitem")
-    public String update_item(@RequestParam("name")String name,@ModelAttribute("Item")Product item) {
 
-        productService.updateItem(item, name);
-        return "redirect:admin";
-    }
+    @DeleteMapping("/products/{id}")
+    public String del_item(@PathVariable("id")Long id){
 
-
-    @GetMapping("/itemdel")
-    public String del_item(@RequestParam("name")String name){
-
-        productRepository.delete(productRepository.findByName(name));
-        return "redirect:admin";
+        productRepository.delete(productRepository.findByProductId(id));
+        return "redirect:/admin/products";
     }
 }

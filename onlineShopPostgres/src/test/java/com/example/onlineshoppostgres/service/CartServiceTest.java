@@ -5,8 +5,7 @@ import com.example.onlineshoppostgres.model.Category;
 import com.example.onlineshoppostgres.model.Product;
 import com.example.onlineshoppostgres.repository.CartRepository;
 import com.example.onlineshoppostgres.repository.ProductRepository;
-import org.hamcrest.Matchers;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -50,34 +49,32 @@ class CartServiceTest {
     @BeforeEach
     void setNewCart() {
         cart = new Cart();
-
     }
 
 
 
     private List<Cart> prepareMockData(){
        List<Cart> cartItems = new ArrayList<>();
-        cartItems.add(new Cart(new Product("shampoo", new BigDecimal(13.5), "refresh shampoo", Category.COSMETICS),1));
-        cartItems.add(new Cart(new Product("milk", new BigDecimal(2.5), "delicious milk", Category.GROCERIES), 1));
-        cartItems.add(new Cart(new Product("apple", new BigDecimal(1.5), "fresh apple", Category.FRUITS), 1));
+        cartItems.add(new Cart(new Product("shampoo", new BigDecimal("13.5"), "refresh shampoo", Category.COSMETICS),1));
+        cartItems.add(new Cart(new Product("milk", new BigDecimal("2.5"), "delicious milk", Category.GROCERIES), 1));
+        cartItems.add(new Cart(new Product("apple", new BigDecimal("1.5"), "fresh apple", Category.FRUITS), 1));
         return cartItems;
-    }
-    @Test
-    void testgetAllProductFromCart(){
-        BDDMockito.given(cartRepository.findAll()).willReturn(prepareMockData());
-       Assert.assertEquals(cartRepository.findAll().size(), 3);
-       Assert.assertEquals(cartService.getAllProductsFromCart().size(), 3);
     }
 
     @Test
-    void testdAddProductToCart(){
+    void testGetAllProductFromCart(){
+        BDDMockito.given(cartRepository.findAll()).willReturn(prepareMockData());
+
+       Assertions.assertEquals(cartService.getAllProductsFromCart().size(), 3);
+    }
+
+    @Test
+    void testAddProductToCart(){
 
         Map<Product, Integer> cartItems = new HashMap<>();
         when(cartRepository.save(any())).thenReturn(cartItems.put(PRODUCT, 1));
-
         cartService.addProductToCart(PRODUCT, 1);
-
-        Assert.assertEquals( cartItems.size(), 1);
+        Assertions.assertEquals( cartItems.size(), 1);
     }
 
     @Test
@@ -85,28 +82,35 @@ class CartServiceTest {
 
         when(cartRepository.findAll()).thenReturn(prepareMockData());
        BigDecimal result = cartService.getTotal();
-       assertThat(result).isEqualByComparingTo(new BigDecimal(17.5));
+       assertThat(result).isEqualByComparingTo(new BigDecimal("17.5"));
     }
 
     @Test
     public void testGetTotalWithQuantityZero(){
-        List<Cart> cartItems = new ArrayList<>();
-        cartItems.add(new Cart(new Product("", new BigDecimal(13.5), "", Category.COSMETICS),0));
-        cartItems.add(new Cart(new Product("", new BigDecimal(2.5), "", Category.GROCERIES), 0));
-        cartItems.add(new Cart(new Product("", new BigDecimal(1.5), "", Category.FRUITS), 0));
-        when(cartRepository.findAll()).thenReturn(cartItems);
+        //given
+        List<Cart> expected = new ArrayList<>();
+        expected.add(new Cart(new Product("", new BigDecimal("13.5"), "", Category.COSMETICS),0));
+        expected.add(new Cart(new Product("", new BigDecimal("2.5"), "", Category.GROCERIES), 0));
+        expected.add(new Cart(new Product("", new BigDecimal("1.5"), "", Category.FRUITS), 0));
+        when(cartRepository.findAll()).thenReturn(expected);
+        //when
+
         BigDecimal result = cartService.getTotal();
+       //then
         assertThat(result).isEqualByComparingTo(new BigDecimal(0));
     }
+
     @Test
     public void testGetTotalWithName(){
+        //given
         List<Cart> cartItems = new ArrayList<>();
-        cartItems.add(new Cart(new Product("Shampoo", new BigDecimal(13.5), "", Category.COSMETICS),1));
-        cartItems.add(new Cart(new Product("Milk    ", new BigDecimal(2.5), "", Category.GROCERIES), 1));
-        cartItems.add(new Cart(new Product("Apple", new BigDecimal(1.5), "", Category.FRUITS), 1));
+        cartItems.add(new Cart(new Product("Shampoo", new BigDecimal("13.5"), "", Category.COSMETICS),1));
+        cartItems.add(new Cart(new Product("Milk    ", new BigDecimal("2.5"), "", Category.GROCERIES), 1));
+        cartItems.add(new Cart(new Product("Apple", new BigDecimal("1.5"), "", Category.FRUITS), 1));
         when(cartRepository.findAll()).thenReturn(cartItems);
+        //when
         BigDecimal result = cartService.getTotal();
-        assertThat(result).isEqualByComparingTo(new BigDecimal(17.5));
+        assertThat(result).isEqualByComparingTo(new BigDecimal("17.5"));
     }
 
     @Test
@@ -115,7 +119,7 @@ class CartServiceTest {
         cartItems.add(new Cart(new Product("", new BigDecimal(20), "", Category.COSMETICS),2));
         when(cartRepository.findAll()).thenReturn(cartItems);
         BigDecimal result = cartService.specialOffer(0.8);
-        assertThat(result).isEqualByComparingTo(new BigDecimal(32.0));
+        assertThat(result).isEqualByComparingTo(new BigDecimal("32.0"));
     }
 
     @Test

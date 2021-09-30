@@ -7,6 +7,9 @@ import com.example.onlineshoppostgres.repository.CartRepository;
 import com.example.onlineshoppostgres.repository.ProductRepository;
 import com.example.onlineshoppostgres.service.CartService;
 import com.example.onlineshoppostgres.service.CategoryService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,13 +27,11 @@ import java.util.stream.Collectors;
 public class ProductController {
 
     private final ProductRepository productRepository;
-    private final CartRepository cartRepository;
     private final CategoryService categoryService;
     private final CartService cartService;
 
     public ProductController(ProductRepository productRepository, CartRepository cartRepository, CategoryService categoryService, CartService cartService) {
         this.productRepository = productRepository;
-        this.cartRepository = cartRepository;
         this.categoryService = categoryService;
         this.cartService = cartService;
     }
@@ -56,14 +57,16 @@ public class ProductController {
         return "category";
     }
 
-    @RequestMapping("/add_to_cart")
+
+    @PostMapping(value = "/products")
     public String addProduct(@RequestParam("name") String name, @ModelAttribute Cart cart){
+        System.out.println("test");
        cartService.addProductToCart(productRepository.findByName(name), 1);
 
-        return "redirect:/cart";
+        return "redirect:/cart-items";
     }
 
-    @RequestMapping("/cart")
+    @GetMapping("/cart-items")
     public String getCart(Model model){
 
         Map<Product,Integer> productList = cartService.getAllProductsFromCart();
@@ -75,12 +78,14 @@ public class ProductController {
         return "cart";
     }
 
-    @RequestMapping("/delete")
-    public String deleteItemFromCart(@RequestParam ("id") Long id){
 
-        cartRepository.delete(cartRepository.findByProduct_ProductId(id));
+   @DeleteMapping("/products/{id}")
+    public String deleteItemFromCart(@PathVariable("id") Long id){
+       System.out.println("delete testing");
+        //cartRepository.delete(cartRepository.findByProduct_ProductId(id));
+        cartService.deleteItem(id);
 
-        return "redirect:/cart";
+        return "redirect:/cart-items";
     }
 
 

@@ -40,7 +40,9 @@
          <td th:iniline="text">[[${a.description}]]</td>
          <td th:iniline="text">[[${a.getCategory().name()}]]</td>
          <td>
-             <a th:href="@{add_to_cart/(name=${a.name})}" class="btn btn-info">Add product to cart</a>
+             <form method="POST" th:action="@{/products(name=${a.name})}">
+                 <button type="submit" name="submit" value="value" class="btn btn-info">Add item to cart</button>
+             </form>
          </td>
      </tr>
 

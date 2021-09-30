@@ -93,5 +93,9 @@ public class CartService {
         return totalSpecial;
     }
 
+    public void deleteItem(Long id){
+        cartRepository.delete(cartRepository.findByProduct_ProductId(id));
+    }
+
 
 }

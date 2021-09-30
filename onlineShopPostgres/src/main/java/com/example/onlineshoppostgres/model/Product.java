@@ -1,6 +1,8 @@
 package com.example.onlineshoppostgres.model;
 
 
+import org.dom4j.util.StringUtils;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 

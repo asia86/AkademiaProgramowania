@@ -10,7 +10,7 @@
 
     <h1 th:align="center">Products list</h1>
 
-<a th:href="@{additems}" class="btn btn-danger add_item">
+<a th:href="@{products-form}" class="btn btn-danger add_item">
     Add Item
 </a>
 <a th:href="@{/products}" class="btn btn-dark back">
@@ -48,8 +48,14 @@
         <td th:iniline="text">[[${a.description}]]</td>
         <td th:iniline="text">[[${a.getCategory().name()}]]</td>
         <td>
-            <a th:href="@{itemupd(name=${a.name})}" class="btn btn-info">Update Item</a>
-            <a th:href="@{itemdel(name=${a.name})}"class="btn btn-danger">Delete Item</a>
+            <form th:method="put" th:action="@{/admin/products/{id}(id=${a.productId})}">
+                <button type="submit"  value="put" class="btn btn-info">Update item</button>
+            </form>
+
+            <form th:method="delete" th:action="@{/admin/products/{id}(id=${a.productId})}">
+                <button type="submit"  value="delete" class="btn btn-info">Remove item</button>
+            </form>
+
         </td>
     </tr>
     </tbody>

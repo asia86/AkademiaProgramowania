@@ -23,13 +23,13 @@ public class ProductService {
     public Product addItem(Product product){
         try {
             if (product.getName() != null  && (product.getDescription() != null)) {
-                if (productRepository.findByName(product.getName()) == null) {
+                //if (productRepository.findByName(product.getName()) == null) {
                     product.setName(product.getName().trim());
                     product.setPrice(product.getPrice());
                     product.setDescription(product.getDescription().trim());
                     product.setCategory(product.getCategory());
                     productRepository.save(product);
-                }
+                //}
             }
         } catch (Exception e) {
             System.out.println("Exception occurs => " + e.getMessage());
@@ -38,10 +38,10 @@ public class ProductService {
 
     }
 
-    public void updateItem(Product product, String name) {
+    public void updateItem(Product product, Long id) {
         if ((product.getName() != null && (product.getDescription() != null))) {
                 Product product1 = productRepository.getById(product.getProductId());
-                product1.setName(name);
+                product1.setName(product.getName());
                 product1.setPrice(product.getPrice());
                 product1.setDescription(product.getDescription().trim());
                 productRepository.save(product1);

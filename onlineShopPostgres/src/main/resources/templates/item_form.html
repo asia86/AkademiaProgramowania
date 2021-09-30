@@ -7,7 +7,7 @@
 
 <body>
 
-<form action="#" th:action="@{saveitem}" th:object="${Item}" method="post" class="myform">
+<form action="#" th:action="@{/admin/products}" th:object="${Item}" method="post" class="myform">
     <h2>Add Item Form</h2>
     <hr>
     <label>Item Name</label>
@@ -29,7 +29,7 @@
     </select>
     <br>
     <input type="submit" class="btn btn-outline-dark" value="Add Item">
-    <a th:href="@{admin}" class="btn btn-outline-primary">
+    <a th:href="@{/admin/products}" class="btn btn-outline-primary">
         Back
     </a>
 </form>
