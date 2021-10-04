@@ -1,5 +1,6 @@
 package com.example.onlineshoppostgres.controller;
 
+import com.example.onlineshoppostgres.exception.ProductNotFoundException;
 import com.example.onlineshoppostgres.model.Category;
 import com.example.onlineshoppostgres.model.Product;
 import com.example.onlineshoppostgres.repository.ProductRepository;
@@ -48,7 +49,7 @@ public class AdminController {
     @PutMapping("/products/{id}")
     public String upd_item(@PathVariable("id")Long id, Model model ){
         System.out.println("uptade test");
-        Product item=productRepository.findByProductId(id);
+        Product item=productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
         model.addAttribute("Item",item);
         model.addAttribute("categories", Category.values());
 

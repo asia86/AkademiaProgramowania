@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.*;
 
 @Service
@@ -20,20 +21,6 @@ public class CartService {
         this.cartRepository = cartRepository;
         this.productRepository = productRepository;
     }
-
-    public Product byName(String name) {
-        Product product = new Product();
-        try {
-            product = productRepository.findByName(name);
-        }
-        catch (RuntimeException e){
-            e.getMessage();
-
-        }
-        return product;
-
-    }
-
 
 
     public Map<Product, Integer> getAllProductsFromCart(){
@@ -58,13 +45,12 @@ public class CartService {
     }
 
 
-    public CartRepository addProductToCart(Product product, Integer quantity){
-        BigDecimal total = new BigDecimal(BigInteger.valueOf(0));
+    public void addProductToCart(Product product, Integer quantity){
+
        boolean bool = false;
        for(Cart item: cartRepository.findAll()){
            if(item.getProduct().getName().equals(product.getName())){
                item.setAmount(item.getAmount()+quantity);
-               total=total.add(item.getProduct().getPrice().multiply(BigDecimal.valueOf(item.getAmount())));
                item.setProduct(product);
                cartRepository.save(item);
                bool = true;
@@ -73,16 +59,14 @@ public class CartService {
        if(!bool){
            Cart cart = new Cart(product, quantity);
            cartRepository.save(cart);
-
         }
-      return cartRepository;
-
     }
 
 
     public BigDecimal specialOffer(double reduction){
 
         BigDecimal totalSpecial = new BigDecimal(BigInteger.valueOf(0));
+
         for ( Cart item : cartRepository.findAll()) {
             if(item.getAmount()>=2){
                 totalSpecial=totalSpecial.add(item.getProduct().getPrice().multiply(BigDecimal.valueOf(reduction)).multiply(BigDecimal.valueOf(item.getAmount())));
@@ -90,6 +74,7 @@ public class CartService {
                 totalSpecial=totalSpecial.add(item.getProduct().getPrice().multiply(BigDecimal.valueOf(item.getAmount())));
             }
         }
+        totalSpecial = totalSpecial.setScale(2, RoundingMode.HALF_UP);
         return totalSpecial;
     }
 

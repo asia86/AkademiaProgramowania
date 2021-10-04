@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Home Page</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+e
+<h2 th:align="center" th:bgcolor="white"> Application has encountered an eroor.
+Please contact support on</h2>
+
+<br><br>
+<p th:align="center">
+
+    <a th:href="@{/admin/products}" class="btn btn-primary">
+        Admin Panel
+    </a>
+    <a th:href="@{/products}" class="btn btn-primary">
+        User Panel
+    </a>
+
+</p>
+</body>
+</html>

@@ -7,20 +7,14 @@ import com.example.onlineshoppostgres.repository.CartRepository;
 import com.example.onlineshoppostgres.repository.ProductRepository;
 import com.example.onlineshoppostgres.service.CartService;
 import com.example.onlineshoppostgres.service.CategoryService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.math.RoundingMode;
 import java.util.Map;
-import java.util.stream.Collectors;
+
 
 @Controller
 @RequestMapping("")
@@ -30,7 +24,7 @@ public class ProductController {
     private final CategoryService categoryService;
     private final CartService cartService;
 
-    public ProductController(ProductRepository productRepository, CartRepository cartRepository, CategoryService categoryService, CartService cartService) {
+    public ProductController(ProductRepository productRepository, CategoryService categoryService, CartService cartService) {
         this.productRepository = productRepository;
         this.categoryService = categoryService;
         this.cartService = cartService;
@@ -71,6 +65,7 @@ public class ProductController {
 
         Map<Product,Integer> productList = cartService.getAllProductsFromCart();
         BigDecimal total = cartService.getTotal();
+        total = total.setScale(2, RoundingMode.HALF_UP);
         model.addAttribute("products", productList);
         model.addAttribute("totalSpecial", cartService.specialOffer(0.8));
         model.addAttribute("total", total);

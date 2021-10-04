@@ -1,10 +1,8 @@
 package com.example.onlineshoppostgres.model;
 
-
-import org.dom4j.util.StringUtils;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -16,6 +14,7 @@ public class Product {
     private String name;
     private BigDecimal price;
     private String description;
+
 
     @Enumerated(EnumType.STRING)
     private Category category;
@@ -49,10 +48,6 @@ public class Product {
 
     public Long getProductId() {
         return productId;
-    }
-
-    public void setProductId(Long id) {
-        this.productId = id;
     }
 
     public String getName() {

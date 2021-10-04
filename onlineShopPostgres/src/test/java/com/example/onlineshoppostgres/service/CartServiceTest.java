@@ -4,14 +4,12 @@ import com.example.onlineshoppostgres.model.Cart;
 import com.example.onlineshoppostgres.model.Category;
 import com.example.onlineshoppostgres.model.Product;
 import com.example.onlineshoppostgres.repository.CartRepository;
-import com.example.onlineshoppostgres.repository.ProductRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.BDDMockito;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,7 +22,6 @@ import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -36,15 +33,10 @@ class CartServiceTest {
     @Mock
     private CartRepository cartRepository;
 
-    @Mock
-    private ProductRepository productRepository;
-
     @InjectMocks
     private CartService cartService;
 
-    private Cart cart;
-    private Product product;
-
+    Cart cart = new Cart();
 
     @BeforeEach
     void setNewCart() {
