@@ -3,7 +3,6 @@ package com.example.onlineshoppostgres.controller;
 import com.example.onlineshoppostgres.model.Cart;
 import com.example.onlineshoppostgres.model.Category;
 import com.example.onlineshoppostgres.model.Product;
-import com.example.onlineshoppostgres.repository.CartRepository;
 import com.example.onlineshoppostgres.repository.ProductRepository;
 import com.example.onlineshoppostgres.service.CartService;
 import com.example.onlineshoppostgres.service.CategoryService;
@@ -33,7 +32,7 @@ public class ProductController {
 
 
     @GetMapping("/")
-    public String homepage(Model model){
+    public String homepage(){
 
         return "home";
     }
